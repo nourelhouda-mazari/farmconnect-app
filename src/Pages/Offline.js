@@ -1,8 +1,16 @@
 import React from 'react';
 import HorsCnx from '../Images/HorsCnx.png';
 import Button from 'react-bootstrap/Button';
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 function Offline() {
+    const { t, i18n } = useTranslation();
+
+    const changeLanguage = lng => {
+      i18n.changeLanguage(lng);
+     };
+
     const offlineContainer = {
         display: 'flex',
         flexDirection: 'column',
@@ -36,10 +44,10 @@ function Offline() {
 
     return (
       <div style={offlineContainer}>
-        <img src={HorsCnx} alt="No connection" style={offlineImage} />
-        <h3 style={offlineTitle}>Oh non!</h3>
-        <p style={offlineMessage}>Pas de connexion</p>
-        <Button variant="outline-success" style={retryButton}>Ressayer</Button>
+        <img src={HorsCnx} alt={t("No connection")}style={offlineImage} />
+        <h3 style={offlineTitle}>{t("Oh no!")}</h3>
+        <p style={offlineMessage}>{t("No connection")}</p>
+        <Button variant="outline-success" style={retryButton}>{t("try again")}</Button>
       </div>
     );
 }

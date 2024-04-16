@@ -1,22 +1,30 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 function HeaderAndFooterExample() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  }; 
+
   return (
     <>
-    <Form.Label>Insérer une offre ou un coupon</Form.Label>
-    <Form.Control type="text" placeholder="Entrez l'offre ou le coupon" />
+    <Form.Label>{t("insert an offer or coupon")}</Form.Label>
+    <Form.Control type="text" placeholder= {t("Enter the offer or coupon")}/>
     <Card className="text-center">
-      <Card.Header>Offres et Coupons</Card.Header>
+      <Card.Header>{t("Offers and Coupons")}</Card.Header>
       <Card.Body>
-        <Card.Title>Special title treatment</Card.Title>
+        <Card.Title>{t("Special title treatment")}</Card.Title>
         <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
+          {t("With supporting text below as a natural lead-in to additional content.")}
         </Card.Text>
-        <Button variant="primary">Utiliser</Button>
+        <Button variant="primary">{t("use")}</Button>
       </Card.Body>
-      <Card.Footer className="text-muted">2 days ago</Card.Footer>
+      <Card.Footer className="text-muted">{t("2 days ago")}</Card.Footer>
     </Card>
     </>
   );

@@ -7,8 +7,17 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+
+
 
 const Search = () => {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  }; 
   const [username, setUsername] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -31,7 +40,7 @@ const Search = () => {
         const users = querySnapshot.docs.map((doc) => doc.data().displayName);
         setSuggestions(users);
       } catch (error) {
-        console.error("Error fetching suggestions: ", error);
+        console.error(t("Error fetching suggestions: "), error);
       }
     };
 
@@ -51,7 +60,7 @@ const Search = () => {
     <div className="search" >
       <input style={{ width: '100%', backgroundColor: '#507050'}}
         type="text"
-        placeholder="Trouver un utilisateur"
+        placeholder={t("find a user")}
         value={username}
         onChange={handleInputChange}
       />

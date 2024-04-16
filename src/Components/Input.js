@@ -13,10 +13,18 @@ import {
 import { db, storage, messaging } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
 
 
 
 const Input = () => {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = lng => {
+    i18n.changeLanguage(lng);
+  }; 
+
   const [text, setText] = useState("");
   const [file, setFile] = useState(null);
   const [image, setImage] = useState(null);
@@ -81,7 +89,7 @@ const Input = () => {
         setImageSelected(false);
       }
     } else {
-      console.error("chatId is not available");
+      console.error(t("chatId is not available"));
     }
   };
 
@@ -95,14 +103,14 @@ const Input = () => {
     <div className="input">
       <input
         type="text"
-        placeholder="Ecrire..."
+        placeholder={t("Write...")}
         onChange={(e) => setText(e.target.value)}
         onKeyUp={handleKeyUp}
         value={text}
       />
       <div className={`send ${fileSelected ? 'file-selected' : ''} ${imageSelected ? 'image-selected' : ''}`}>
         <label htmlFor="fileInput">
-          <img src={Attach} alt="Attacher" />
+          <img src={Attach} alt={t("Attach")} />
         </label>
         <input
           type="file"
@@ -119,7 +127,7 @@ const Input = () => {
           style={{ display: "none" }}
           onChange={handleImageChange}
         />
-        <button onClick={handleSend}>Envoyer</button>
+        <button onClick={handleSend}>{t("Submit")}</button>
       </div>
       <div ref={messagesEndRef} />
     </div>

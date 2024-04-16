@@ -18,22 +18,22 @@ function Home() {
   };
 
 
-  const [isPlaying, setIsPlaying] = useState(false); 
+  const [isPlaying, setIsPlaying] = useState(false); // State to control video playback
 
   useEffect(() => {
     const videoElement = document.getElementById('backgroundVideo');
 
     if (videoElement) {
-      videoElement.addEventListener('ended', () => videoElement.play()); 
-      setIsPlaying(true); 
+      videoElement.addEventListener('ended', () => videoElement.play()); // Loop playback
+      setIsPlaying(true); // Set initial playing state
     }
 
     return () => {
       if (videoElement) {
         videoElement.removeEventListener('ended', () => videoElement.play());
       }
-    }; 
-  }, []); 
+    }; // Cleanup on unmount
+  }, []); // Empty dependency array for one-time effect
 
   const handlePlayPause = () => {
     const videoElement = document.getElementById('backgroundVideo');
@@ -56,8 +56,8 @@ function Home() {
         <video
           id="backgroundVideo"
           src={Video}
-          autoPlay={isPlaying} 
-          muted 
+          autoPlay={isPlaying} // Control playback with state
+          muted // Mute the video by default (optional)
           loop
           style={{
             position: 'fixed',
@@ -65,10 +65,10 @@ function Home() {
             top: 0,
             left: 0,
             width: '100%',
-            height: 'auto',
+            height: '100vh',
             objectFit: 'cover', 
             zIndex: -1, 
-            filter: 'brightness(0.4)',
+            filter: 'brightness(0.6)',
 
            }}
         />
@@ -76,14 +76,15 @@ function Home() {
         <Col md={4} className='forms-container' >
             <Login />
           </Col>
-          <Col className="farmconnect-hero" >
+          <Col className="farmconnect-hero">
               <h2 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem' }}>FarmConnect</h2>
 
               <p style={{ fontSize: '1.2rem', lineHeight: '1.5' }}>
-{t("hello")}
+
+             {t("hello**FarmConnect** connects farmers, consumers, and sellers within a dynamic agricultural community. Find fresh products, resources, and a support network")}
               </p>
 
-              <button onClick={handlePlayPause} className="farmconnect-play-button">
+              <button onClick={handlePlayPause} class="farmconnect-play-button">
                 {isPlaying ? 'Pause' : 'Play'}
               </button>
             </Col>
